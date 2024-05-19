@@ -15,6 +15,9 @@ export default function Index() {
       <Hero />
       {user ? <div>
         <p>こんにちは {user.name}</p>
+        <a href="/stocks">
+          ストックの確認
+        </a>
       </div>
         : <div>
           <a href="/api/auth/login">
