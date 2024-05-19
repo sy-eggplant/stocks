@@ -1,31 +1,39 @@
+'use client';
+
 import React from 'react';
-import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
-import Highlight from '../../components/Highlight';
+import Loading from '../../components/Loading';
+import ErrorMessage from '../../components/ErrorMessage';
 
-export default withPageAuthRequired(
-  async function SSRPage() {
-    const { user } = await getSession();
-    return (
-      <>
-        <div className="mb-5" data-testid="ssr">
-          <h1 data-testid="ssr-title">Server-side Rendered Page</h1>
-          <div data-testid="ssr-text">
-            <p>
-              You can protect a server-side rendered page by wrapping it with <code>withPageAuthRequired</code>. Only
-              logged in users will be able to access it. If the user is logged out, they will be redirected to the login
-              page instead.{' '}
-            </p>
-          </div>
-        </div>
-        <div className="result-block-container" data-testid="ssr-json">
-          <div className="result-block">
-            <h6 className="muted">User</h6>
-            <Highlight>{JSON.stringify(user, null, 2)}</Highlight>
-          </div>
-        </div>
-      </>
-    );
-  },
-  { returnTo: '/ssr' }
-);
+function Other() {
+  const { user, isLoading } = useUser();
+
+  return (
+    <>
+      {isLoading && <Loading />}
+      {user && (
+        <>
+          <h1>Other</h1>
+          <ul>
+            <li>
+              <a href="https://docs.google.com/spreadsheets/d/1Bb2ITNxtO5GkJs4a-reKF5cZbhMw5AtjscHZWnXWMpA/edit#gid=1613057959">
+                月々の費用
+              </a>
+            </li>
+            <li>
+              <a href="https://drive.google.com/drive/u/0/folders/1FNXl-6_gN7PeYAJr685dtceV0EIAuQ_t">
+                共有フォルダ
+              </a>
+            </li>
+          </ul>
+        </>
+      )}
+    </>
+  );
+}
+
+export default withPageAuthRequired(Other, {
+  onRedirecting: () => <Loading />,
+  onError: error => <ErrorMessage>{error.message}</ErrorMessage>
+});

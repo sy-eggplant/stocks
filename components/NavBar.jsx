@@ -45,13 +45,13 @@ const NavBar = () => {
                     </PageLink>
                   </NavItem>
                   <NavItem>
-                    <PageLink href="/recipe" className="nav-link" testId="navbar-ssr">
-                      recipe
+                    <PageLink href="/recipes" className="nav-link" testId="navbar-ssr">
+                      Recipes
                     </PageLink>
                   </NavItem>
                   <NavItem>
                     <PageLink href="/other" className="nav-link" testId="navbar-external">
-                      other
+                      Other
                     </PageLink>
                   </NavItem>
                 </>

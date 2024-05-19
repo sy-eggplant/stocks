@@ -5,8 +5,9 @@ import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
 import Loading from '../../components/Loading';
 import ErrorMessage from '../../components/ErrorMessage';
+import Highlight from '../../components/Highlight';
 
-function Stocks() {
+function Recipes() {
   const { user, isLoading } = useUser();
 
   return (
@@ -14,15 +15,14 @@ function Stocks() {
       {isLoading && <Loading />}
       {user && (
         <>
-          <h1>Stocks</h1>
-          todo: API連携
+          <h1>Recipes</h1>
         </>
       )}
     </>
   );
 }
 
-export default withPageAuthRequired(Stocks, {
+export default withPageAuthRequired(Recipes, {
   onRedirecting: () => <Loading />,
   onError: error => <ErrorMessage>{error.message}</ErrorMessage>
 });

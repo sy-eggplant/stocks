@@ -14,14 +14,11 @@ export default function Index() {
       {isLoading && <Loading />}
       <Hero />
       {user ? <div>
-        <p>こんにちは {user.name}</p>
-        <a href="/stocks">
-          ストックの確認
-        </a>
+        <p>Hello {user.name}</p>
       </div>
         : <div>
           <a href="/api/auth/login">
-            ログインする
+            Login
           </a>
         </div>
       }
